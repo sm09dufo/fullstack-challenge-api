@@ -56,6 +56,8 @@ const getGame = async (req: Request, res: Response, next: NextFunction) => {
             //
             // A clarification I'd make when actually working on the product
             scoring: game.away_period_scores,
+            hits: game.away_batter_totals ? game.away_batter_totals.hits.toString() : null,
+            errors: game.away_errors ? game.away_errors : null,
             score: totals('away'),
             record: '42-28' // hard-coding this for now, as I don't see the option currently available in the API
         },
@@ -70,6 +72,8 @@ const getGame = async (req: Request, res: Response, next: NextFunction) => {
             // A clarification I'd make when actually working on the product
             scoring: game.home_period_scores,
             score: totals('home'),
+            hits: game.home_batter_totals ? game.home_batter_totals.hits : null,
+            errors: game.home_errors !== undefined ? game.home_errors.toString() : null,
             record: '42-28' // hard-coding this for now, as I don't see the option currently available in the API
         },
         eventInfo: {
